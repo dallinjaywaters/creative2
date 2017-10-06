@@ -13,11 +13,15 @@
     			console.log(searched);
     			e.preventDefault();
     			$("#searchResults").text(searched);
-    			var myurl = "http://food2fork.com/api/search?key=7885cf0b8fc9df1efbad8ed0c4b84154&q=" + searched;
+    			var myurl = "https://json2jsonp.com/?url=http://food2fork.com/api/search?key=7885cf0b8fc9df1efbad8ed0c4b84154&q=" + searched + "callback=parsed_json";
     			console.log(myurl);
+			
+
     			$.ajax({
+				//type : "GET",
       				url : myurl,
-      				dataType : "jsonp",
+      				//crossDomain : true,
+				dataType : "jsonp",
       				success : function(parsed_json) {
         				var recipeDisplay = "";
         				for (i = 0; i < 10; i++) {
