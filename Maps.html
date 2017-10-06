@@ -35,25 +35,44 @@
         $("#searchButton").click(function(e)
         {
             var searchval = $("#addressField").val();
+	    console.log(searchval);
             APIval = searchval.replace(/ /g, '+');
+	    console.log(APIval);
             e.preventDefault();
             var searchurl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + APIval + "&key=AIzaSyDOwZbCfdw7dTc6Q9p3vUJY571PzHMBlL0&libraries=places";
             console.log(searchurl);
             
-            var map = new google.maps.Map(document.getElementById('map'), 
-                {
-                    zoom : 4
-                });
             var geocoder = new google.maps.Geocoder();
-            var address = searchval;
+	    var marker = new google.maps.Marker({
+		map: map
+	    });
+            geocoder.geocode({'placeId' : searchval}, function(results, status){
+		if (status !== 'OK') {
+			window.alert('Geocoder failed due to: ' + status);
+			return;
+		}
+		map.setZoom(4);
+		map.setCenter(results[0].geometry.location);
+		marker.setPlace({
+			placeId: searchval,
+			location: results[0].geometry.location
+		});
+		marker.setVisible(true);
+});
+            //var map = new google.maps.Map(document.getElementById('map'), 
+              //  {
+                //    zoom : 4,
+                  //  center : 4
+               // });
+            
         });
     });
     </script>
       <h1>Nearby Landmark search</h1>
-    <form>
-      Enter an address to find Landmarks near: 
+<form>
+Enter an address to find Landmarks near: 
       <input type="text" id="addressField" value=""> <br>
       <input id="searchButton" type="submit" value="Submit">
-    </form>
-   </body>
+ </form>
+</body>
 </html>
