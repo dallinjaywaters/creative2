@@ -13,7 +13,9 @@
     			console.log(searched);
     			e.preventDefault();
     			$("#searchResults").text(searched);
-    			var myurl = "https://json2jsonp.com/?url=http://food2fork.com/api/search?key=7885cf0b8fc9df1efbad8ed0c4b84154&q=" + searched + "callback=parsed_json";
+                //"https://json2jsonp.com/?url=
+    			//var myurl = "http://food2fork.com/api/search?key=7885cf0b8fc9df1efbad8ed0c4b84154&q=" + searched //%callback=parsed_json;
+                var myurl = "https://json2jsonp.com/?url=http://food2fork.com/api/search?key=7885cf0b8fc9df1efbad8ed0c4b84154&q=" + searched+ "&callback=$.ajax";
     			console.log(myurl);
 			
 
@@ -31,7 +33,7 @@
         					recipeDisplay += "<ul>";
         					recipeDisplay += "<li>Title: "+title;
         					//recipeDisplay += "<li>Views: "+views;
-        					recipeDisplay += "<li>Link: "+"<a href=\""+link+"\">"+link+"</a>";
+        					recipeDisplay += "<li>Link: "+"<a              href=\""+link+"\">"+link+"</a>";
         					recipeDisplay += "</ul>";
 					}
         				console.log(recipeDisplay);
