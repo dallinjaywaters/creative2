@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <style>
        #map {
-        height: 400px;
-        width: 80%;
+        height: 600px;
+        width: 60%;
        }
     </style>
   </head>
   <body>
-    <h1>Landmark search</h1>
-	<form>
-	Enter an address to search for landmarks nearby: <br>
-	<input id = "searchAddress" type = "text" value = ""> <br>
-	<input id = "searchButton" type = "submit" value = "Submit"><br>
-	</form>
+    <h3>My Google Maps Demo</h3>
     <div id="map"></div>
     <script>
       function initMap() {
@@ -32,6 +28,23 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOwZbCfdw7dTc6Q9p3vUJY571PzHMBlL0&callback=initMap">
     </script>
+    <script>
+    $(document).ready(function(e)
+    {
+        $("#searchButton").click(function(e)
+        {
+            var searchval = $("#addressField").val();
+            APIval = searchval.replace(/ /g, '+');
+            e.preventDefault();
+            var searchurl = "https://maps.googleapis.com/maps/api/geocode/json?address=" +                      APIval + "&key=AIzaSyDOwZbCfdw7dTc6Q9p3vUJY571PzHMBlL0&libraries=places";
+            console.log(searchurl);
+            
+        });
+    });
+    </script>
+      <h1>Nearby Landmark search</h1>
+Enter an address to find Landmarks near: 
+      <input type="text" id="addressField" value=""> <br>
+      <input id="searchButton" type="submit" value="Submit">
   </body>
 </html>
-
